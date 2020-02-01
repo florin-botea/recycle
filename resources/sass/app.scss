@@ -1,0 +1,143 @@
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/viewerjs/dist/viewer';
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.recicle-circle {
+	background-color:YellowGreen;
+	background-size: contain;
+	background-position: center;
+	border: 5px solid green;
+	-webkit-animation: rotating 2s linear infinite;
+	-moz-animation: rotating 2s linear infinite;
+	-ms-animation: rotating 2s linear infinite;
+	-o-animation: rotating 2s linear infinite;
+	animation: rotating 2s linear infinite;
+	animation-play-state: paused;
+}
+
+.recicle-circle-button:hover + .recicle-circle {
+	animation-play-state: running;
+}
+
+.btn-with-spinner > .spinner {
+	display: none;
+}
+.bottom-0 {
+	bottom: 0px;
+}
+.right-0 {
+	right: 0px;
+}
+.btn-with-spinner:disabled > .spinner{
+	display: inline-block;
+}
+
+.flex-1 {
+	flex: 1 1 0%;
+}
+.bg-center {
+	background-repeat: no-repeat !important;
+	background-position: center !important;
+}
+.thumbnail, .image{
+	background-size: cover !important;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 5px;
+}
+.thumbnail:hover {
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+	opacity: 0.8;
+}
+.ratio-1 {
+	position: relative;
+	padding-top: 50%;
+}
+.stretched {
+	position: absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+}
+@media (min-width: 768px) {
+	.md\:w-100 {
+		width: 100% !important;
+	}
+}
+
+.opacity-0 {
+	opacity: 0;
+}
+
+.nav-link.active {
+	color: white;
+}
+
+.square {
+	position: relative;
+}
+
+.square::after {
+	content: "";
+	display: block;
+	padding-bottom: 100%;
+}
+
+.w-1\/3 {
+	width:25%;
+}
+
+.checkbox-image + label{
+	border: 2px solid rgba(0,0,0,0);
+}
+
+.checkbox-image:checked + label{
+	border: 2px solid red;
+}
+
+.square-1\/3 {
+	display: block;
+	position: relative;
+	padding-top: 33.33%;
+	width: 33.33%;
+}
+
+.square-1\/12 {
+	display: block;
+	position: relative;
+	padding-top: 8.33%;
+	width: 8.33%;
+}

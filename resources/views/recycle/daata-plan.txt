@@ -1,0 +1,7 @@
+carousel_photos [image1, image2]
+articles: [
+	[title, text, photo, url],
+	...
+]
+company: [name, adress, real_adress, cui, nrc, phone, email, program, logo, coord[x,y]] - vor fi array sau text ca sa ma asigur ca pot accepta mai multe
+company_detaild: [bio, activity, photos, services_photos]

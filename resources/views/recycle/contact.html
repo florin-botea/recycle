@@ -1,0 +1,246 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+			integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+			crossorigin=""/>
+		<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+			integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+			crossorigin=""></script>
+		
+		<style>
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+			.carousel {
+				width:100%;
+			}
+			@media (min-width: 768px) {
+				.carousel {
+					width:600px;
+				}
+			}
+			.recicle-circle {
+				background-color:YellowGreen;
+				background-image: url('recycle-circle-button.png');
+				background-size: contain;
+				background-position: center;
+				border: 10px solid green;
+				-webkit-animation: rotating 2s linear infinite;
+				-moz-animation: rotating 2s linear infinite;
+				-ms-animation: rotating 2s linear infinite;
+				-o-animation: rotating 2s linear infinite;
+				animation: rotating 2s linear infinite;
+				animation-play-state: paused;
+			}
+			
+			.recicle-circle-button:hover + .recicle-circle {
+				animation-play-state: running;
+				background-color: LawnGreen;
+			}
+		</style>
+	</head>
+	
+	<body>
+
+		<div class="app-wrapper">
+			
+			<nav class="navbar navbar-expand-lg navbar-dark" style="background:green;">
+				<a class="navbar-brand" href="#">Navbar</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+					<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+						<li class="nav-item active">
+							<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Link</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+						</li>
+					</ul>
+					<form class="form-inline my-2 my-lg-0">
+						<input class="form-control mr-sm-2" type="search" placeholder="Search">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					</form>
+				</div>
+			</nav>
+			
+			<div class="container">
+				
+<div class="row">
+	<div class="col-md py-2">
+		<h2> Eco nu stiu cum SRL </h2>
+		CUI: <strong>RO234234</strong>
+		<br>
+		Nr. reg. com.: <strong>J52/932/2018</strong>
+		<br>
+		<br>
+		Adresa sediului social:  strada Serban Cantacuzino, nr. 153A, sat Comana, comuna Comana, judetul Giurgiu
+		<br>
+		Adresa punctului de lucru (depozit):  strada Serban Cantacuzino, nr. 153A, sat Comana, comuna Comana, judetul Giurgiu
+		<br>
+		<br>
+		Telefon: <strong>0725129614</strong>
+		<br>
+		Email: <strong>email@email.ro</strong>
+		<br>
+		Program: 
+		<br>
+		<strong>
+			Luni-Vineri: 9-18
+			<br>
+			Sambata: 90
+		</strong>
+	</div>
+	<div class="col-md">
+		<div id="mapAPI" style="border:1px solid black; width:100%;height:400px;"></div>
+	</div>
+</div>
+
+<div class="row py-2 mt-2">
+	<div class="col-md-6">
+		<form>
+			<h3> Trimite-ne un mesaj </h3>
+			<div class="form-group">
+				<label for="validationTooltip01"> Nume si prenume </label>
+				<input type="text" class="form-control" id="validationTooltip01" required>
+				<div class="valid-tooltip">
+					Looks good!
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="validationTooltip01"> Telefon </label>
+				<input type="text" class="form-control" id="validationTooltip01" required>
+				<div class="valid-tooltip">
+					Looks good!
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="validationTooltip01"> Email </label>
+				<input type="text" class="form-control" id="validationTooltip01" required>
+				<div class="valid-tooltip">
+					Looks good!
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="validationTooltip01"> Mesaj </label>
+				<textarea class="form-control" id="validationTooltip01" required></textarea>
+				<div class="valid-tooltip">
+					Looks good!
+				</div>
+			</div>
+			<button class="btn btn-primary" type="submit"> Submit form </button>
+		</form>	
+	</div>
+</div>
+			
+			</div>
+
+			<footer class="row py-3 px-5 m-0 bg-dark text-white">
+				<div class="col-md">
+					<ul class="">
+						<caption> Meniu </caption>
+						<li>
+							nav-item-1
+						</li>
+						<li>
+							nav-item-2
+						</li>
+					</ul>
+				</div>
+				<div class="col-md">
+					<ul class="">
+						<caption> Ultimele stiri </caption>
+						<li>
+							stirea 1
+						</li>
+						<li>
+							stirea 2
+						</li>
+					</ul>
+				</div>
+				<div class="col-md">
+					<ul class="">
+						<caption> Program </caption>
+						<li>
+							luni-vineri
+						</li>
+						<li>
+							sambata
+						</li>
+					</ul>
+				</div>
+				<div class="col-md">
+					Adresa:
+					<br>
+					adresa aici
+				</div>
+			</footer>
+		</div>
+	
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<script>
+			$(document).ready(function(){
+				var map = L.map('mapAPI').setView([44.411495, 26.104844], 15);
+				L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+					attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+				}).addTo(map);				
+				L.marker([44.411495, 26.104844]).addTo(map)
+					.bindPopup('Sediul nostru')
+					.openPopup();
+			})
+			
+		
+		
+			var refreshLoop = true
+			setTimeout( function(){
+				if (refreshLoop){
+					//location.reload()
+				}
+			}, 2000)
+			window.onkeypress = function(e){
+				if(e.key === 's'){
+					refreshLoop = false
+				}
+			}
+		</script>
+	</body>
+</html>
